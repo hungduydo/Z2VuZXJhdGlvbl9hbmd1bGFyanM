@@ -8,8 +8,15 @@ import HeroSchema = require("./../dataAccess/schemas/HeroSchema");
 import RepositoryBase = require("./BaseRepository");
 
 class HeroRepository  extends RepositoryBase<IHeroModel> {
+
     constructor () {
         super(HeroSchema);
+    }
+
+    retrieveIn (callback: (error: any, result: any) => void) {
+        this._model.find({}).
+        	populate('parent').
+        	exec(callback);
     }
 }
 

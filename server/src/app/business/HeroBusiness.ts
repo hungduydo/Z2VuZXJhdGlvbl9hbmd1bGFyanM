@@ -16,6 +16,7 @@ class HeroBusiness implements IHeroBusiness {
     }
 
     create (item: IHeroModel, callback: (error: any, result: any) => void) {
+        console.log(JSON.stringify(item));
         this._heroRepository.create(item, callback);
     }
 
@@ -23,13 +24,18 @@ class HeroBusiness implements IHeroBusiness {
         this._heroRepository.retrieve(callback);
     }
 
+    retrieveIn (callback: (error: any, result: any) => void) {
+        this._heroRepository.retrieveIn(callback);
+    }
+
     update (_id: string, item: IHeroModel, callback: (error: any, result: any) => void) {
 
         this._heroRepository.findById(_id, (err, res) => {
             if(err) callback(err, res);
 
-            else
+            else {
                 this._heroRepository.update(res._id, item, callback);
+            }
 
         });
     }

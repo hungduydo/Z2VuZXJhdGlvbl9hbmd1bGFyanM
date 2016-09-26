@@ -7,4 +7,5 @@ export class Hero {
     power: string;
     amountPeopleSaved: number;
     name: string;
+    parent: Hero[];
 }

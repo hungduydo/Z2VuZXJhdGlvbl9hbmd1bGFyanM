@@ -3,7 +3,7 @@
  */
 
 import IHeroModel = require('./interfaces/HeroModel');
-
+import mongoose = require("mongoose");
 class HeroModel {
 
     private _heroModel: IHeroModel;
@@ -21,6 +21,10 @@ class HeroModel {
 
     get amountPeopleSaved (): number {
         return this._heroModel.amountPeopleSaved;
+    }
+
+    get parent (): string[] {
+        return this._heroModel.parent;
     }
     
 }

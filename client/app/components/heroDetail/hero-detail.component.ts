@@ -2,20 +2,22 @@
  * Created by Moiz.Kachwala on 02-06-2016.
  */
 
-import {Component, Input, OnInit} from '@angular/core';
-import {Hero} from "../../models/hero";
-import { ActivatedRoute, Params } from '@angular/router';
-import {HeroService} from "../../services/hero.service";
+ import {Component, Input, OnInit, AfterViewChecked} from '@angular/core';
+ import {Hero} from "../../models/hero";
+ import { ActivatedRoute, Params } from '@angular/router';
+ import {HeroService} from "../../services/hero.service";
 
-@Component({
-    selector: 'my-hero-detail',
-    templateUrl: './app/components/heroDetail/hero-detail.component.html'
-})
+ @Component({
+     selector: 'my-hero-detail',
+     templateUrl: './app/components/heroDetail/hero-detail.component.html'
+ })
 
-export class HeroDetailComponent implements OnInit {
-    @Input() hero: Hero;
-    newHero = false;
-    error: any;
+ export class HeroDetailComponent implements OnInit {
+     @Input() hero: Hero;
+     @Input() heroes: Hero[];
+     newHero = false;
+     init = false;
+     error: any;
     navigated = false; // true if navigated here
 
 
@@ -25,6 +27,8 @@ export class HeroDetailComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log("ngOnInit");
+        this.heroService.getHeroes().then(heroes => this.heroes = heroes);
         this.route.params.forEach((params: Params) => {
             let id = params['id'];
             if (id === 'new') {
@@ -33,22 +37,72 @@ export class HeroDetailComponent implements OnInit {
             } else {
                 this.newHero = false;
                 this.heroService.getHero(id)
-                    .then(hero => this.hero = hero);
+                .then(hero => this.hero = hero);
             }
         });
     }
 
+    ngAfterViewInit() {
+
+    }
+
+    ngAfterViewChecked() {
+        if (!this.init) {
+            if ( $('.chosen-select').length > 0) {
+                $(function() {
+                    $('.chosen-select').chosen();
+                });
+                this.init = true;
+            }
+        }
+    }
+
     save() {
+        var selectedParent: string[] = $('.chosen-select').val();
+        this.hero.parent = [];
+        if (selectedParent && this.heroes) {
+            var newParent: Hero[] = [];
+            for (var i = 0; i < selectedParent.length; i++) {
+                var parentId = selectedParent[i];
+                for (var j = 0; j < this.heroes.length; ++j) {
+                    var eachHero = this.heroes[j];
+                    if (eachHero._id === parentId) {
+                        this.hero.parent.push(eachHero);
+                        break;
+                    }
+                }
+            }
+        }
+        // this.hero.parent = selectedParent;
         this.heroService
-            .save(this.hero)
-            .then(hero => {
+        .save(this.hero)
+        .then(hero => {
                 this.hero = hero; // saved hero, w/ id if new
                 this.goBack();
             })
             .catch(error => this.error = error); // TODO: Display error message
-    }
+        }
 
-    goBack() {
-        window.history.back();
+        goBack() {
+            window.history.back();
+        }
+
+        getOther() {
+            var that = this;
+            var data = this.heroes.filter(function(el){
+                // Remove self
+                if (el._id === that.hero._id) {
+                    return false;
+                }
+
+                // Remove old current parent
+                for (let parent of that.hero.parent) {
+                    if (el._id === parent._id) {
+                        return false;
+                    }
+                }
+                return true;
+            });
+            return data;
+        }
     }
-}

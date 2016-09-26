@@ -6,15 +6,19 @@ import express = require("express");
 import HeroBusiness = require("./../app/business/HeroBusiness");
 import IBaseController = require("./BaseController");
 import IHeroModel = require("./../app/model/interfaces/HeroModel");
-
+import mongoose = require('mongoose');
 class HeroController implements IBaseController <HeroBusiness> {
 
     create(req: express.Request, res: express.Response): void {
         try {
 
             var hero: IHeroModel = <IHeroModel>req.body;
+            if(hero.parent == null) {
+                hero.parent = [];
+            }
             var heroBusiness = new HeroBusiness();
             heroBusiness.create(hero, (error, result) => {
+                console.log(error);
                 if(error) res.send({"error": "error"});
                 else res.send({"success": "success"});
             });
@@ -61,7 +65,8 @@ class HeroController implements IBaseController <HeroBusiness> {
         try {
 
             var heroBusiness = new HeroBusiness();
-            heroBusiness.retrieve((error, result) => {
+            heroBusiness.retrieveIn((error, result) => {
+                console.log(error);
                 if(error) res.send({"error": "error"});
                 else res.send(result);
             });

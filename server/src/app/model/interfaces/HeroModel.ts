@@ -8,6 +8,7 @@ interface HeroModel extends mongoose.Document {
     power: string;
     amountPeopleSaved: number;
     name: string;
+    parent: string[];
 }
 
 export = HeroModel;

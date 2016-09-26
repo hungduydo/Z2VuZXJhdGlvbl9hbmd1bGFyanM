@@ -23,7 +23,8 @@ class HeroSchema {
             amountPeopleSaved: {
                 type: Number,
                 required: true
-            }
+            },
+            parent:[{ type: String, ref: 'Heroes' }]
         });
 
         return schema;
