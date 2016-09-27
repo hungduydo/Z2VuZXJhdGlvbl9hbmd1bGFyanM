@@ -1,0 +1,39 @@
+<div class="tree">
+	<ul class="center">
+       <li *ngFor="let hero of family">
+           <div class="card" (click)="onSelect(hero)">
+                <img src="http://farm9.staticflickr.com/8376/8533679017_1cbcb9b583.jpg">
+                <div class="des">
+                    <div class="full-name">{{hero.name}}</div>
+                    <div class="job-title">{{hero.surname}}</div>    
+                </div>
+               
+           </div>
+           <ul *ngIf="hero.childs != null && hero.childs.length > 0">
+                <li *ngFor="let hero1 of hero.childs">
+                    <div class="card" (click)="onSelect(hero1)">
+                        <img src="http://farm9.staticflickr.com/8376/8533679017_1cbcb9b583.jpg">
+                        <div class="des">
+                            <div class="full-name">{{hero1.name}}</div>
+                            <div class="job-title">{{hero1.surname}}</div>    
+                        </div>
+                    </div>
+
+                    <ul *ngIf="hero1.childs != null && hero1.childs.length > 0">
+                        <li *ngFor="let hero2 of hero1.childs">
+                            <div class="card" (click)="onSelect(hero2)" >
+                                <img src="http://farm9.staticflickr.com/8376/8533679017_1cbcb9b583.jpg">
+                                <div class="des">
+                                    <div class="full-name">{{hero2.name}}</div>
+                                    <div class="job-title">{{hero2.surname}}</div>    
+                                </div>
+                           </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+   
