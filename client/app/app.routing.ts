@@ -4,6 +4,7 @@ import { DashboardComponent }   from './components/dashboard/dashboard.component
 import { HeroesComponent }      from './components/heroes/heroes.component';
 import { HeroDetailComponent }  from './components/heroDetail/hero-detail.component';
 import { PersonalDetailComponent }  from './components/personalDetail/personal-detail.component';
+import { FamilyTreeComponent }  from './components/familyTree/family-tree.component';
 
 const appRoutes: Routes = [
   {
@@ -29,7 +30,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'heroes',
-    component: HeroesComponent
+    component: FamilyTreeComponent
   }
 ];
 

@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
-import {HeroService} from "../../services/hero.service";
-import {Hero} from "../../models/hero";
+import { HeroService } from "../../services/hero.service";
+import { Hero } from "../../models/hero";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
-    selector: 'my-heroes',
-    styleUrls: ['app/heroes.component.css'],
-    templateUrl: 'app/heroes.component.html',
+    selector: 'family-tree',
+    styleUrls: ['./app/components/familyTree/family-tree.component.css'],
+    templateUrl: './app/components/familyTree/family-tree.component.html',
     providers: [HeroService]
 })
-export class HeroesComponent implements OnInit  { 
+export class FamilyTreeComponent implements OnInit  { 
 
-    heroes: Hero[];
+    hero: Hero;
     family: Hero[] = [];
     private isLoading = true;
     selectedHero: Hero;
@@ -21,28 +21,24 @@ export class HeroesComponent implements OnInit  {
         private router: Router,
         private activeRoute: ActivatedRoute) { }
 
-    getHeroes(): void {
-        this.heroService.getHeroes().then(heroes => this.heroes = heroes);
-    }
-
-    getPersons(id: string) {
-        this.heroService.getHero(id).subscribe(
-            data => this.family[0] = data,
+    getTree(id: string) {
+        this.heroService.getHero(id).then(
+            hero => this.hero = hero,
             error => console.log(error),
             () => this.isLoading = false
         );
     }
 
     ngOnInit(): void {
-        
+
         console.log(this.activeRoute);
         this.activeRoute.params.forEach((params: Params) => {
             let id: string = params['id'];
             console.log("Selected id " + id);
-            if(id != "") {
-               this.getPersons(id.toString());
+            if(id != null) {
+                this.getTree(id);
             } else {
-                this.getPersons("0");
+                this.getTree(id);
             }
             
         });
@@ -50,7 +46,7 @@ export class HeroesComponent implements OnInit  {
 
     onSelect(hero: Hero): void {
         console.log("Ok i click");
-        this.getPersons(hero._id);
+        this.getTree(hero._id);
     }
 
 }

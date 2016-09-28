@@ -22,7 +22,7 @@ export class HeroService {
             .catch(this.handleError);
     }
 
-    getHero(id: string) {
+    getHero(id: string):  Promise<Hero> {
         return this.http.get(this.heroesUrl + '/' + id)
             .toPromise()
             .then(response => response.json())

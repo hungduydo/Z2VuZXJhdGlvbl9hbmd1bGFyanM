@@ -1,18 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component} from '@angular/core';
 
 @Component({
     selector:'my-app',
     templateUrl: './app/app.html'
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
     title = 'Tour of Heroes';
-
-    constructor(private _router: Router, private segment:RouteSegment) {
-    }
-
-    ngOnInit() {
-        console.log('current route name', this._router.url);
-    }
 }

@@ -10,7 +10,7 @@ import { HeroesComponent }      from './components/heroes/heroes.component';
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
 import { HeroDetailComponent }  from './components/heroDetail/hero-detail.component';
 import { PersonalDetailComponent }  from './components/personalDetail/personal-detail.component';
-
+import { FamilyTreeComponent }  from './components/familyTree/family-tree.component';
 import { HeroService }  from './services/hero.service';
 
 @NgModule({
@@ -25,7 +25,8 @@ import { HeroService }  from './services/hero.service';
     HeroesComponent,
     DashboardComponent,
     HeroDetailComponent,
-    PersonalDetailComponent
+    PersonalDetailComponent,
+    FamilyTreeComponent
   ],
   providers: [
     HeroService

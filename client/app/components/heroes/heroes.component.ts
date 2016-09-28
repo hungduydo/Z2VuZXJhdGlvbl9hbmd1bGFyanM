@@ -29,12 +29,12 @@ export class HeroesComponent implements OnInit {
     onSelect(hero: Hero) { this.selectedHero = hero; }
 
     gotoDetail() {
-        this.router.navigate(['/detail', this.selectedHero._id]);
+        this.router.navigate(['/admin/detail', this.selectedHero._id]);
     }
 
     addHero() {
         this.selectedHero = null;
-        this.router.navigate(['/detail', 'new']);
+        this.router.navigate(['/admin/detail', 'new']);
     }
 
     deleteHero(hero: Hero, event: any) {

@@ -8,4 +8,5 @@ export class Hero {
     amountPeopleSaved: number;
     name: string;
     parent: Hero[];
+    spouse: Hero[];
 }
