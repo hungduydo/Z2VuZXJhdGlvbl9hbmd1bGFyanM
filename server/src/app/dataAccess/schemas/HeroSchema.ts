@@ -24,7 +24,8 @@ class HeroSchema {
                 type: Number,
                 required: true
             },
-            parent:[{ type: String, ref: 'Heroes' }]
+            parent:[{ type: String, ref: 'Heroes' }],
+            spouse:[{ type: String, ref: 'Heroes' }]
         });
 
         return schema;

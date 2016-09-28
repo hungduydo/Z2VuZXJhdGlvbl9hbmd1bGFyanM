@@ -19,12 +19,12 @@ class HeroRoutes {
         router.post("/heroes", controller.create);
         router.put("/heroes/:_id", controller.update);
         router.get("/heroes/:_id", controller.findById);
+        router.get("/tree/:_id", controller.getTree);
+        router.get("/child/:_id", controller.getChild);
         router.delete("/heroes/:_id", controller.delete);
 
         return router;
     }
-
-
 }
 
 Object.seal(HeroRoutes);

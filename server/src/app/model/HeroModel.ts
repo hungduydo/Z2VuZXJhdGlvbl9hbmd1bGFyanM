@@ -23,6 +23,10 @@ class HeroModel {
         return this._heroModel.amountPeopleSaved;
     }
 
+    get spouse (): string[] {
+        return this._heroModel.parent;
+    }
+
     get parent (): string[] {
         return this._heroModel.parent;
     }

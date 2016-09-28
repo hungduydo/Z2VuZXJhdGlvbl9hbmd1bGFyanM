@@ -77,6 +77,7 @@ class HeroController implements IBaseController <HeroBusiness> {
 
         }
     }
+
     findById(req: express.Request, res: express.Response): void {
         try {
 
@@ -93,5 +94,41 @@ class HeroController implements IBaseController <HeroBusiness> {
 
         }
     }
+
+    getTree(req: express.Request, res: express.Response): void {
+        try {
+
+            var _id: string = req.params._id;
+            var heroBusiness = new HeroBusiness();
+            heroBusiness.getTree(_id, (error, result) => {
+                if(error) res.send({"error": "error"});
+                else res.send(result);
+            });
+        }
+        catch (e)  {
+            console.log(e);
+            res.send({"error": "error in your request"});
+
+        }
+    }
+
+    getChild(req: express.Request, res: express.Response): void {
+        try {
+
+            var _id: string = req.params._id;
+            var heroBusiness = new HeroBusiness();
+            heroBusiness.getChild(_id, (error, result) => {
+                if(error) res.send({"error": "error"});
+                else res.send(result);
+            });
+        }
+        catch (e)  {
+            console.log(e);
+            res.send({"error": "error in your request"});
+
+        }
+    }
+
+    
 }
 export = HeroController;
