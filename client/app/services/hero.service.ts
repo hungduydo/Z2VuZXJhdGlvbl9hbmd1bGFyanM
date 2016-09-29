@@ -29,14 +29,14 @@ export class HeroService {
             .catch(this.handleError);
     }
 
-    save(hero: Hero): Promise<Hero>  {
+    save(hero: Hero) {
         if (hero._id) {
             return this.put(hero);
         }
         return this.post(hero);
     }
 
-    private post(hero: Hero): Promise<Hero> {
+    private post(hero: Hero) {
         let headers = new Headers({
             'Content-Type': 'application/json'});
 

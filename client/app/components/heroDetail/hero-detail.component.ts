@@ -29,7 +29,7 @@
     ngOnInit() {
         console.log("ngOnInit");
         this.heroService.getHeroes().then(heroes => {
-            if(heroes == null) {
+            if (heroes == null) {
                 // code...
             } else {
                 this.heroes = heroes;    
@@ -54,9 +54,11 @@
 
     ngAfterViewChecked() {
         if (!this.init) {
+            var that = this;
             if ( $('.chosen-select').length > 0) {
                 $(function() {
-                    $('.chosen-select').chosen();
+                    $('.chosen-select').chosen().change(that.parentChange);
+                    $('.chosen-select-deselect').chosen({ allow_single_deselect: true }).change(that.parentChange);
                 });
                 this.init = true;
             }
@@ -64,36 +66,21 @@
     }
 
     save() {
-        var selectedParent: string[] = $('#parent-select').val();
-        var selectedSpouse: string[] = $('#spouse-select').val();
-        this.hero.parent = [];
-        if (selectedParent && this.heroes) {
-            for (var i = 0; i < selectedParent.length; i++) {
-                var parentId = selectedParent[i];
+        var selectedChild: string[] = $('#child-select').val();
+        this.hero.child = [];
+        if (selectedChild && this.heroes) {
+            for (var i = 0; i < selectedChild.length; i++) {
+                var parentId = selectedChild[i];
                 for (var j = 0; j < this.heroes.length; ++j) {
                     var eachHero = this.heroes[j];
                     if (eachHero._id === parentId) {
-                        this.hero.parent.push(eachHero);
+                        this.hero.child.push(eachHero);
                         break;
                     }
                 }
             }
         }
 
-        this.hero.spouse = [];
-        if (selectedSpouse && this.heroes) {
-            for (var i = 0; i < selectedSpouse.length; i++) {
-                var spouseId = selectedSpouse[i];
-                for (var j = 0; j < this.heroes.length; ++j) {
-                    var eachHero = this.heroes[j];
-                    if (eachHero._id === spouseId) {
-                        this.hero.spouse.push(eachHero);
-                        break;
-                    }
-                }
-            }
-        }
-        // this.hero.parent = selectedParent;
         this.heroService
         .save(this.hero)
         .then(hero => {
@@ -101,56 +88,58 @@
                 this.goBack();
             })
             .catch(error => this.error = error); // TODO: Display error message
-    }
-
-    goBack() {
-        window.history.back();
-    }
-
-    getOther() {
-        var that = this;
-        if (!this.heroes || this.heroes.length == 0) {
-            return [];
         }
-        var data = this.heroes.filter(function(el){
+
+        parentChange(target, event) {
+            console.log(target);
+        }
+
+        goBack() {
+            window.history.back();
+        }
+
+        getOther() {
+            var that = this;
+            if (this.heroes == null || this.heroes.length == 0) {
+                return [];
+            }
+            var data = this.heroes.filter(function(el){
             // Remove self
             if (el._id === that.hero._id) {
                 return false;
             }
 
-            // Remove old current parent
-            if(that.hero.parent != null) {
-                for (let parent of that.hero.parent) {
-                    if (el._id === parent._id) {
-                        return false;
-                    }
-                }
+            if (that.hero.father != null && that.hero.father._id === el._id) {
+                return false;
             }
-            
+
+            if (that.hero.mother != null && that.hero.mother._id === el._id) {
+                return false;
+            }
+
             return true;
         });
-        return data;
-    }
-
-    getAvailbleSpouse() {
-        var that = this;
-        if (!this.heroes || this.heroes.length == 0) {
-            return [];
+            return data;
         }
-        var data = this.heroes.filter(function(el){
-            // Remove self
-            if (el._id === that.hero._id) {
-                return false;
-            }
 
-            // Remove old current parent
-            for (let spouse of that.hero.spouse) {
-                if (el._id === spouse._id) {
+        getAvailbleSpouse() {
+            var that = this;
+            if (!this.heroes || this.heroes.length == 0) {
+                return [];
+            }
+            var data = this.heroes.filter(function(el){
+                // Remove self
+                if (el._id === that.hero._id) {
                     return false;
                 }
-            }
-            return true;
-        });
-        return data;
+
+                // Remove current spouse
+                if (that.hero.spouse !== null && el._id === that.hero.spouse._id) {
+                    return false;
+                }
+
+                return true;
+            });
+            return data;
+        }
     }
-}

@@ -7,6 +7,11 @@ export class Hero {
     power: string;
     amountPeopleSaved: number;
     name: string;
-    parent: Hero[];
-    spouse: Hero[];
+    gender: string;
+    birth: string;
+    death: string;  
+    mother: Hero;
+    father: Hero;
+    child: Hero[];
+    spouse: Hero;
 }

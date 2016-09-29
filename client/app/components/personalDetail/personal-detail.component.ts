@@ -49,61 +49,12 @@
 
     ngAfterViewChecked() {
         if (!this.init) {
-            if ( $('.chosen-select').length > 0) {
-                $(function() {
-                    $('.chosen-select').chosen();
-                });
-                this.init = true;
-            }
+            eval("if ( $('.chosen-select').length > 0) {$(function() {$('.chosen-select').chosen();});this.init = true;}");
         }
     }
 
-    save() {
-        var selectedParent: string[] = $('.chosen-select').val();
-        this.hero.parent = [];
-        if (selectedParent && this.heroes) {
-            var newParent: Hero[] = [];
-            for (var i = 0; i < selectedParent.length; i++) {
-                var parentId = selectedParent[i];
-                for (var j = 0; j < this.heroes.length; ++j) {
-                    var eachHero = this.heroes[j];
-                    if (eachHero._id === parentId) {
-                        this.hero.parent.push(eachHero);
-                        break;
-                    }
-                }
-            }
-        }
-        // this.hero.parent = selectedParent;
-        this.heroService
-        .save(this.hero)
-        .then(hero => {
-                this.hero = hero; // saved hero, w/ id if new
-                this.goBack();
-            })
-            .catch(error => this.error = error); // TODO: Display error message
-        }
-
-        goBack() {
-            window.history.back();
-        }
-
-        getOther() {
-            var that = this;
-            var data = this.heroes.filter(function(el){
-                // Remove self
-                if (el._id === that.hero._id) {
-                    return false;
-                }
-
-                // Remove old current parent
-                for (let parent of that.hero.parent) {
-                    if (el._id === parent._id) {
-                        return false;
-                    }
-                }
-                return true;
-            });
-            return data;
-        }
+    goBack() {
+        window.history.back();
     }
+
+}

@@ -10,7 +10,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
     templateUrl: './app/components/familyTree/family-tree.component.html',
     providers: [HeroService]
 })
-export class FamilyTreeComponent implements OnInit  { 
+export class FamilyTreeComponent implements OnInit  {
 
     hero: Hero;
     family: Hero[] = [];
@@ -32,15 +32,14 @@ export class FamilyTreeComponent implements OnInit  {
     ngOnInit(): void {
 
         console.log(this.activeRoute);
-        this.activeRoute.params.forEach((params: Params) => {
+        this.activeRoute.params.forEach((params : Params) => {
             let id: string = params['id'];
             console.log("Selected id " + id);
-            if(id != null) {
+            if (id != null) {
                 this.getTree(id);
             } else {
                 this.getTree(id);
             }
-            
         });
     }
 
