@@ -36,7 +36,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     }
 
     findById (_id: string, callback: (error: any, result: T) => void) {
-        this._model.findById( _id).populate("parent spouse").exec(callback);
+        this._model.findById( _id).populate("child spouse father mother").exec(callback);
     }
 
 

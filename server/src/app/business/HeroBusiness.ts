@@ -24,10 +24,6 @@ class HeroBusiness implements IHeroBusiness {
         this._heroRepository.retrieve(callback);
     }
 
-    retrieveIn (callback: (error: any, result: any) => void) {
-        this._heroRepository.retrieveIn(callback);
-    }
-
     update (_id: string, item: IHeroModel, callback: (error: any, result: any) => void) {
 
         this._heroRepository.findById(_id, (err, res) => {
@@ -50,10 +46,6 @@ class HeroBusiness implements IHeroBusiness {
 
     getTree (_id: string, callback: (error: any, result: IHeroModel) => void) {
         this._heroRepository.getTree(_id, callback);
-    }
-
-    getChild (_id: string, callback: (error: any, result: any) => void) {
-        this._heroRepository.getChild(_id, callback);
     }
 }
 

@@ -14,21 +14,9 @@ class HeroRepository extends RepositoryBase<IHeroModel> {
         super(HeroSchema);
     }
 
-    retrieveIn (callback: (error: any, result: any) => void) {
-        this._model.find({}).
-        	populate('parent').
-        	populate('spouse').
-        	exec(callback);
-    }
-
     getTree (_id: string, callback: (error: any, result: mongoose.Document) => void) {
     	var that = this;
         this._model.findById( _id).exec(callback);
-    }
-
-    getChild(_id: string, callback: (error:any, result:mongoose.Document) => void) {
-    	this._model.find({ parent : _id}).
-        	exec(callback);
     }
 }
 

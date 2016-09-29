@@ -13,8 +13,8 @@ class HeroController implements IBaseController <HeroBusiness> {
         try {
 
             var hero: IHeroModel = <IHeroModel>req.body;
-            if(hero.parent == null) {
-                hero.parent = [];
+            if(hero.child == null) {
+                hero.child = [];
             }
             var heroBusiness = new HeroBusiness();
             heroBusiness.create(hero, (error, result) => {
@@ -65,7 +65,7 @@ class HeroController implements IBaseController <HeroBusiness> {
         try {
 
             var heroBusiness = new HeroBusiness();
-            heroBusiness.retrieveIn((error, result) => {
+            heroBusiness.retrieve((error, result) => {
                 console.log(error);
                 if(error) res.send({"error": "error"});
                 else res.send(result);
@@ -111,24 +111,6 @@ class HeroController implements IBaseController <HeroBusiness> {
 
         }
     }
-
-    getChild(req: express.Request, res: express.Response): void {
-        try {
-
-            var _id: string = req.params._id;
-            var heroBusiness = new HeroBusiness();
-            heroBusiness.getChild(_id, (error, result) => {
-                if(error) res.send({"error": "error"});
-                else res.send(result);
-            });
-        }
-        catch (e)  {
-            console.log(e);
-            res.send({"error": "error in your request"});
-
-        }
-    }
-
     
 }
 export = HeroController;

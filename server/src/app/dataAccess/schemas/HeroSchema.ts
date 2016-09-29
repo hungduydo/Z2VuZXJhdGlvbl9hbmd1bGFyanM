@@ -24,8 +24,22 @@ class HeroSchema {
                 type: Number,
                 required: true
             },
-            parent:[{ type: String, ref: 'Heroes' }],
-            spouse:[{ type: String, ref: 'Heroes' }]
+            gender: {
+                type: String,
+                required: false
+            },
+            birth: {
+                type: String,
+                required: false
+            },
+            death: {
+                type: String,
+                required: false
+            },
+            child:[{ type: String, ref: 'Heroes' }],
+            spouse:{ type: String, ref: 'Heroes' },
+            father:{ type: String, ref: 'Heroes' },
+            mother:{ type: String, ref: 'Heroes' },
         });
 
         return schema;

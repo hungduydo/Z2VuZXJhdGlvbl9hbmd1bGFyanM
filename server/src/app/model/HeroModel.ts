@@ -23,12 +23,32 @@ class HeroModel {
         return this._heroModel.amountPeopleSaved;
     }
 
-    get spouse (): string[] {
-        return this._heroModel.parent;
+    get gender (): string {
+        return this._heroModel.gender;
     }
 
-    get parent (): string[] {
-        return this._heroModel.parent;
+    get birth (): string {
+        return this._heroModel.birth;
+    }
+
+    get death (): string {
+        return this._heroModel.death;
+    }
+
+    get spouse (): string {
+        return this._heroModel.spouse;
+    }
+
+    get child (): string[] {
+        return this._heroModel.child;
+    }
+
+    get father (): string {
+        return this._heroModel.father;
+    }
+
+    get mother (): string {
+        return this._heroModel.mother;
     }
     
 }
