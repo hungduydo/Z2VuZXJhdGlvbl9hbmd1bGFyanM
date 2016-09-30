@@ -16,12 +16,12 @@ class HeroSchema {
                 type: String,
                 required: true
             },
-            power: {
+            birthPlace: {
                 type: String,
                 required: true
             },
-            amountPeopleSaved: {
-                type: Number,
+            address: {
+                type: String,
                 required: true
             },
             gender: {

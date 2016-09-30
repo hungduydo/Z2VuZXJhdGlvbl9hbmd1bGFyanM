@@ -48,21 +48,26 @@
         });
     }
 
-    ngAfterViewInit() {
-
-    }
-
     ngAfterViewChecked() {
         if (!this.init) {
             var that = this;
             if ( $('.chosen-select').length > 0) {
                 $(function() {
-                    $('.chosen-select').chosen().change(that.parentChange);
-                    $('.chosen-select-deselect').chosen({ allow_single_deselect: true }).change(that.parentChange);
+                    $('.chosen-select').chosen().change(that.valueChange);
+                    $('.chosen-select-deselect').chosen({ allow_single_deselect: true }).change(that.valueChange);
+                    $('#gender-select').chosen({ allow_single_deselect: true, disable_search :true }).change(that.genderChange);
+
+                    $(".chosen-select-deselect").bind("DOMSubtreeModified", that.selectStructureChange);
+                    $('.chosen-select').chosen().bind("DOMSubtreeModified", that.selectStructureChange);
                 });
                 this.init = true;
             }
         }
+    }
+
+    public selectStructureChange = (event) => {
+        $(event.currentTarget).trigger("chosen:updated");
+        console.log(event);
     }
 
     save() {
@@ -87,23 +92,43 @@
                 this.hero = hero; // saved hero, w/ id if new
                 this.goBack();
             })
-            .catch(error => this.error = error); // TODO: Display error message
-        }
+            .catch(error => this.error = error);
+    }
 
-        parentChange(target, event) {
-            console.log(target);
-        }
+    public valueChange = (event) => {
 
-        goBack() {
-            window.history.back();
+        console.log(event);
+        switch (event.currentTarget.id) {
+            case "father-select":
+            this.hero.father = this.idToHero(event.currentTarget.value);
+            break;
+            case "mother-select":
+            this.hero.mother = this.idToHero(event.currentTarget.value);
+            break;
+            case "spouse-select":
+            this.hero.spouse = this.idToHero(event.currentTarget.value);
+            break;
+            default:
+                // code...
+                break;
         }
+    }
 
-        getOther() {
-            var that = this;
-            if (this.heroes == null || this.heroes.length == 0) {
-                return [];
-            }
-            var data = this.heroes.filter(function(el){
+    public genderChange = (event) => {
+        // Apply value change for current current hero
+        this.hero.gender = event.currentTarget.value;
+    }
+
+    goBack() {
+        window.history.back();
+    }
+
+    getOther() {
+        var that = this;
+        if (this.heroes == null || this.heroes.length === 0) {
+            return [];
+        }
+        var data = this.heroes.filter(function(el){
             // Remove self
             if (el._id === that.hero._id) {
                 return false;
@@ -117,29 +142,49 @@
                 return false;
             }
 
+            if (that.hero.child) {
+                for (var i = 0; i < that.hero.child.length; ++i) {
+                    if (that.hero.child[i]._id === el._id) {
+                        return false;
+                    }
+                }
+            }
+
             return true;
         });
-            return data;
+        return data;
+    }
+
+    idToHero(id) {
+        if (!id) {
+            return null;
         }
 
-        getAvailbleSpouse() {
-            var that = this;
-            if (!this.heroes || this.heroes.length == 0) {
-                return [];
-            }
-            var data = this.heroes.filter(function(el){
-                // Remove self
-                if (el._id === that.hero._id) {
-                    return false;
-                }
-
-                // Remove current spouse
-                if (that.hero.spouse !== null && el._id === that.hero.spouse._id) {
-                    return false;
-                }
-
-                return true;
-            });
-            return data;
+        for (let i of this.heroes) {
+           if (i._id === id) {
+               return i;
+           }
         }
     }
+
+    getAvailbleSpouse() {
+        var that = this;
+        if (!this.heroes || this.heroes.length === 0) {
+           return [];
+        }
+        var data = this.heroes.filter(function(el){
+            // Remove self
+            if (el._id === that.hero._id) {
+                return false;
+            }
+
+            // Remove current spouse
+            if (that.hero.spouse !== null && el._id === that.hero.spouse._id) {
+                return false;
+            }
+
+            return true;
+        });
+        return data;
+    }
+}

@@ -15,12 +15,12 @@ class HeroModel {
         return this._heroModel.name;
     }
 
-    get power (): string {
-        return this._heroModel.power;
+    get birthPlace (): string {
+        return this._heroModel.birthPlace;
     }
 
-    get amountPeopleSaved (): number {
-        return this._heroModel.amountPeopleSaved;
+    get address (): string {
+        return this._heroModel.address;
     }
 
     get gender (): string {

@@ -4,8 +4,8 @@
 
 export class Hero {
     _id: string;
-    power: string;
-    amountPeopleSaved: number;
+    birthPlace: string;
+    homeAddress: string;
     name: string;
     gender: string;
     birth: string;

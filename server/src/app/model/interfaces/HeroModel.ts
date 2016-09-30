@@ -5,8 +5,8 @@
 import mongoose = require("mongoose");
 
 interface HeroModel extends mongoose.Document {
-    power: string;
-    amountPeopleSaved: number;
+    birthPlace: string;
+    address: string;
     name: string;
     gender: string;
     death: string;
