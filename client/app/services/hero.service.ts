@@ -28,6 +28,7 @@ export class HeroService {
 
     getTree(id: string):  Promise<Hero> {
         return this.http.get('api/tree' + '/' + id)
+            .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
     }

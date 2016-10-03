@@ -1,11 +1,11 @@
 <div class="tree">
 	<ul class="center">
-       <li>
+       <li *ngIf="hero">
            <div class="card" (click)="onSelect(hero)">
                 <img src="http://farm9.staticflickr.com/8376/8533679017_1cbcb9b583.jpg">
                 <div class="des">
-                    <div class="full-name">{{hero}}</div>
                     <div class="full-name">{{hero.name}}</div>
+                    <div class="full-name">{{hero}}</div>
                 </div>
                
            </div>

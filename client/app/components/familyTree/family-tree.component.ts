@@ -32,15 +32,16 @@ export class FamilyTreeComponent implements OnInit  {
     ngOnInit(): void {
 
         console.log(this.activeRoute);
-        this.activeRoute.params.forEach((params : Params) => {
-            let id: string = params['id'];
-            console.log("Selected id " + id);
-            if (!id) {
-                this.getTree("57ee4e5f4652033878bd094a");
-            } else {
-                this.getTree(id);
-            }
-        });
+        this.getTree("57ee4e5f4652033878bd094a");
+        // this.activeRoute.params.forEach((params : Params) => {
+        //     let id: string = params['id'];
+        //     console.log("Selected id " + id);
+        //     if (!id) {
+                
+        //     } else {
+        //         this.getTree(id);
+        //     }
+        // });
     }
 
     onSelect(hero: Hero): void {
