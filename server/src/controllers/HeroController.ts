@@ -111,6 +111,23 @@ class HeroController implements IBaseController <HeroBusiness> {
 
         }
     }
+
+    getFamily(req: express.Request, res: express.Response): void {
+        try {
+
+            var _id: string = req.params._id;
+            var heroBusiness = new HeroBusiness();
+            heroBusiness.getFamily(_id, (error, result) => {
+                if(error) res.send({"error": error});
+                else res.send(result);
+            });
+        }
+        catch (e)  {
+            console.log(e);
+            res.send({"error": "error in your request"});
+
+        }
+    }
     
 }
 export = HeroController;

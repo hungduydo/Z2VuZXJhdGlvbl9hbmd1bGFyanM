@@ -22,7 +22,7 @@ export class FamilyTreeComponent implements OnInit  {
         private activeRoute: ActivatedRoute) { }
 
     getTree(id: string) {
-        this.heroService.getHero(id).then(
+        this.heroService.getTree(id).then(
             hero => this.hero = hero,
             error => console.log(error),
             () => this.isLoading = false
@@ -35,8 +35,8 @@ export class FamilyTreeComponent implements OnInit  {
         this.activeRoute.params.forEach((params : Params) => {
             let id: string = params['id'];
             console.log("Selected id " + id);
-            if (id != null) {
-                this.getTree(id);
+            if (!id) {
+                this.getTree("57ee4e5f4652033878bd094a");
             } else {
                 this.getTree(id);
             }

@@ -20,6 +20,7 @@ class HeroRoutes {
         router.put("/heroes/:_id", controller.update);
         router.get("/heroes/:_id", controller.findById);
         router.get("/tree/:_id", controller.getTree);
+        router.get("/family/:_id", controller.getFamily);
         router.delete("/heroes/:_id", controller.delete);
 
         return router;

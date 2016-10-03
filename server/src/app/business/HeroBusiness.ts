@@ -47,6 +47,10 @@ class HeroBusiness implements IHeroBusiness {
     getTree (_id: string, callback: (error: any, result: IHeroModel) => void) {
         this._heroRepository.getTree(_id, callback);
     }
+
+    getFamily (_id: string, callback: (error: any, result: IHeroModel) => void) {
+        this._heroRepository.getFamily(_id, callback);
+    }
 }
 
 
