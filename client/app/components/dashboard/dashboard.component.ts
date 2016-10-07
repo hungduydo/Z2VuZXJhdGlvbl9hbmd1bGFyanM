@@ -24,7 +24,13 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         this.heroService.getHeroes()
-            .then(heroes => this.heroes = heroes);
+            .then((heroes) => {
+                this.heroes = heroes
+            });
+    }
+
+    ngAfterViewChecked() {
+        console.log('change');
     }
 
     gotoDetail(hero: Hero) {

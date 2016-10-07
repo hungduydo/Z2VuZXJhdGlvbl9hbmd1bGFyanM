@@ -29,6 +29,21 @@ export class FamilyTreeComponent implements OnInit  {
         );
     }
 
+    ngAfterViewChecked() {
+        console.log('div change' + $('.tree'));
+        var listLiTag = document.querySelectorAll('.tree>ul>li>ul>li');
+        if(listLiTag.length > 0) {
+            var minWidth = 0;
+            for (var i = 0; i < listLiTag.length; ++i) {
+                var liTag = listLiTag[i];
+                minWidth += liTag.offsetWidth;
+            }
+
+            var center = document.querySelector('.tree>.center');
+            center.style.width = minWidth + 'px';
+        }
+    }
+
     ngOnInit(): void {
 
         console.log(this.activeRoute);

@@ -26,3 +26,13 @@ nav a:hover {
 nav a.router-link-active {
     color: #039be5;
 }
+
+.app-content {
+    background: url(./resources/images/bg/bg.jpg);
+    background-size: cover;
+    height: 100%;
+}
+
+.main-content {
+    height: 100%;
+}

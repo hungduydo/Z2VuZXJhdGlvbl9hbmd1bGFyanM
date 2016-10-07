@@ -49,7 +49,7 @@
 /*Now the CSS*/
 * {margin: 0; padding: 0;}
 .tree {
-    height: 450px;
+    overflow-x: auto; 
 }
 .tree ul {
     padding-top: 20px; 
