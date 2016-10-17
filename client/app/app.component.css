@@ -30,9 +30,4 @@ nav a.router-link-active {
 .app-content {
     background: url(./resources/images/bg/bg.jpg);
     background-size: cover;
-    height: 100%;
-}
-
-.main-content {
-    height: 100%;
 }

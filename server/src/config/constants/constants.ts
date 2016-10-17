@@ -3,7 +3,7 @@
  */
 
 class Constants {
-    static DB_CONNECTION_STRING: string = process.env.NODE_ENV === 'production' ? process.env.dbURI : "mongodb://localhost:27017/quickStart"
+    static DB_CONNECTION_STRING: string = process.env.NODE_ENV === 'production' ? process.env.dbURI : "mongodb://hungdd:7414365698@ds057176.mlab.com:57176/do_family_tree"
 }
 Object.seal(Constants);
 export = Constants;

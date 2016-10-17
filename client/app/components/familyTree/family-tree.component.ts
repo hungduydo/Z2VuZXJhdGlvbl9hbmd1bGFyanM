@@ -38,16 +38,20 @@ export class FamilyTreeComponent implements OnInit  {
                 var liTag = listLiTag[i];
                 minWidth += liTag.offsetWidth;
             }
-
+            // add padding
+            minWidth += 14;
+            var treeView = document.querySelector('.tree');
             var center = document.querySelector('.tree>.center');
+
             center.style.width = minWidth + 'px';
+            treeView.scrollLeft = (center.offsetWidth - treeView.offsetWidth )/2;
         }
     }
 
     ngOnInit(): void {
 
         console.log(this.activeRoute);
-        this.getTree("57ee4e5f4652033878bd094a");
+        this.getTree("580498d1dcba0f430d0410c4");
         // this.activeRoute.params.forEach((params : Params) => {
         //     let id: string = params['id'];
         //     console.log("Selected id " + id);
