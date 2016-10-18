@@ -30,21 +30,21 @@ export class FamilyTreeComponent implements OnInit  {
     }
 
     ngAfterViewChecked() {
-        console.log('div change' + $('.tree'));
+
         var listLiTag = document.querySelectorAll('.tree>ul>li>ul>li');
         if(listLiTag.length > 0) {
             var minWidth = 0;
             for (var i = 0; i < listLiTag.length; ++i) {
                 var liTag = listLiTag[i];
-                minWidth += liTag.offsetWidth;
+                minWidth += liTag['offsetWidth'];
             }
             // add padding
             minWidth += 14;
             var treeView = document.querySelector('.tree');
             var center = document.querySelector('.tree>.center');
 
-            center.style.width = minWidth + 'px';
-            treeView.scrollLeft = (center.offsetWidth - treeView.offsetWidth )/2;
+            center['style']['width'] = minWidth + 'px';
+            treeView['scrollLeft'] = (center['offsetWidth'] - treeView['offsetWidth'] )/2;
         }
     }
 

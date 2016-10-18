@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'my-heroes',
-    templateUrl: './app/components/heroes/heroes.component.html'
+    templateUrl: './app/components/heroes/heroes.component.html',
+    styleUrls:['./app/components/heroes/heroes.component.css']
 })
 
 export class HeroesComponent implements OnInit {

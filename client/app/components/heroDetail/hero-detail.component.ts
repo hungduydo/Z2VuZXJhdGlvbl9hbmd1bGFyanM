@@ -9,7 +9,8 @@
 
  @Component({
      selector: 'my-hero-detail',
-     templateUrl: './app/components/heroDetail/hero-detail.component.html'
+     templateUrl: './app/components/heroDetail/hero-detail.component.html',
+     styleUrls: ['./app/components/heroDetail/hero-detail.component.css']
  })
 
  export class HeroDetailComponent implements OnInit {
