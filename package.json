@@ -6,7 +6,8 @@
     "clean": "gulp clean",
     "compile": "gulp compile",
     "build": "gulp build",
-    "deploy": "concurrent --kill-others \"gulp watch\" \"gulp start\""
+    "deploy": "concurrent --kill-others \"gulp watch\" \"gulp start\"",
+    "start": "gulp start"
   },
   "engines": {
     "node": "4.4.7",
