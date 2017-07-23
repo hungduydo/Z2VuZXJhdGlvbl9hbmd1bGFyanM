@@ -6,9 +6,7 @@
     "clean": "gulp clean",
     "compile": "gulp compile",
     "build": "gulp build",
-    "deploy": "concurrent --kill-others \"gulp watch\" \"gulp start\"",
-    "postinstall": "npm install -g gulp && gulp installTypings",
-    "start":"gulp start"
+    "deploy": "concurrent --kill-others \"gulp watch\" \"gulp start\""
   },
   "engines": {
     "node": "4.4.7",

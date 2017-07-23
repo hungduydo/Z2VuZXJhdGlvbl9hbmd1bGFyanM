@@ -1,1 +1,1 @@
-web: node ./dist/server/bin/www
+web: node node_modules/gulp/bin/gulp start
